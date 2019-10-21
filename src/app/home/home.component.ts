@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IComment } from '../icomment';
+import {faHeart} from '@fortawesome/free-solid-svg-icons';
+import {faHeartBroken} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,9 @@ import { IComment } from '../icomment';
 })
 export class HomeComponent implements OnInit {
 
-  comments : IComment[];
+  faHeart = faHeart;
+  faHeartBroken = faHeartBroken;
+  comments : IComment[] = [];
   @ViewChild('commentText' ,{static: false} ) comm : ElementRef;
 
   constructor() { }
@@ -24,10 +28,10 @@ export class HomeComponent implements OnInit {
   addComment(){
     let c:IComment={
       comment:this.comm.nativeElement.value,
-      dislike:0,
       like:0,
-      numberOfReviews:0,
-      star:0
+      dislike:0,
+      star:0,
+      numberOfReviews:0
     }
     this.comments.push(c);
   }
@@ -36,7 +40,7 @@ export class HomeComponent implements OnInit {
     c.like++;
   }
 
-  commentDisLike(c:IComment){
+  commentDislike(c:IComment){
     c.dislike++;
   }
 
